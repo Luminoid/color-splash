@@ -1,6 +1,9 @@
 # resources
 src/res/des/
 
+# WebStorm
+.idea/
+
 # dependencies
 node_modules/
 
