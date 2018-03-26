@@ -1,47 +1,60 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const pantoneColorLst = [["Ultra Violet", "#5F4B8B"], ["Greenery", "#88B04B"], ["Serenity", "#93A9D1"], ["Rose Quartz", "#F7CACA"],
-    ["Marsala", "#964F4C"], ["Radiant Orchid", "#AD5E99"], ["Emerald", "#009473"], ["Tangerine Tango", "#DD4124"],
-    ["Honeysuckle", "#D94F70"], ["Turquoise", "#45B5AA"], ["Mimosa", "#F0C05A"], ["Blue Iris", "#5A5B9F"],
-    ["Chili Pepper", "#9B1B30"], ["Sand Dollar", "#DECDBE"], ["Blue Turquoise", "#53B0AE"], ["Tigerlily", "#E2583E"],
-    ["Aqua Sky", "#7BC4C4"], ["True Red", "#BF1932"], ["Fuchsia Rose", "#C74375"], ["Cerulean", "#98B4D4"]];
+const pantoneColorLst = [
+  ['Ultra Violet', '#5F4B8B'],
+  ['Greenery', '#88B04B'],
+  ['Serenity', '#93A9D1'],
+  ['Rose Quartz', '#F7CACA'],
+  ['Marsala', '#964F4C'],
+  ['Radiant Orchid', '#AD5E99'],
+  ['Emerald', '#009473'],
+  ['Tangerine Tango', '#DD4124'],
+  ['Honeysuckle', '#D94F70'],
+  ['Turquoise', '#45B5AA'],
+  ['Mimosa', '#F0C05A'],
+  ['Blue Iris', '#5A5B9F'],
+  ['Chili Pepper', '#9B1B30'],
+  ['Sand Dollar', '#DECDBE'],
+  ['Blue Turquoise', '#53B0AE'],
+  ['Tigerlily', '#E2583E'],
+  ['Aqua Sky', '#7BC4C4'],
+  ['True Red', '#BF1932'],
+  ['Fuchsia Rose', '#C74375'],
+  ['Cerulean', '#98B4D4']
+];
 
-class ColorBlock extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {isHover: false};
-    }
+class ColorBlock extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isHover: false };
+  }
 
-    handleHover = () => {
-        this.setState(prevState => ({
-            isHover: !prevState.isHover
-        }));
-    };
+  handleHover = () => {
+    this.setState(prevState => ({
+      isHover: !prevState.isHover
+    }));
+  };
 
-    render(){
-        return (
-            <div className="Pantone-ColorBlock" style={{ backgroundColor: this.props.color }} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                <p className="ColorBlock-name">
-                    {this.props.name}
-                </p>
-                <p className="ColorBlock-value">
-                    {this.props.color}
-                </p>
-            </div>
-        );
-
-    }
+  render() {
+    return (
+      <div
+        className="Pantone-ColorBlock"
+        style={{ backgroundColor: this.props.color }}
+        onMouseEnter={this.handleHover}
+        onMouseLeave={this.handleHover}
+      >
+        <p className="ColorBlock-name">{this.props.name}</p>
+        <p className="ColorBlock-value">{this.props.color}</p>
+      </div>
+    );
+  }
 }
 
-export function PantoneColorPane () {
-    const colorBlocks = pantoneColorLst.map((colorItem) =>
-        <ColorBlock name={colorItem[0]} color={colorItem[1]}/>
-    );
+export function PantoneColorPane() {
+  const colorBlocks = pantoneColorLst.map(colorItem => (
+    <ColorBlock name={colorItem[0]} color={colorItem[1]} />
+  ));
 
-    return (
-        <div className="Pantone-ColorPane">
-            {colorBlocks}
-        </div>
-    )
+  return <div className="Pantone-ColorPane">{colorBlocks}</div>;
 }

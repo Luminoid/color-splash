@@ -6,9 +6,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-    <DocumentTitle title='Color Splash'>
-        <App />
-    </DocumentTitle>,
-    document.getElementById('root')
+  <DocumentTitle title="Color Splash">
+    <App />
+  </DocumentTitle>,
+  document.getElementById('root')
 );
 registerServiceWorker();
