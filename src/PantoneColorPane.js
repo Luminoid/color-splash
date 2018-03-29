@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import { ColorBlock } from './ColorBlock';
 
 const pantoneColorLst = [
   ['Ultra Violet', '#5F4B8B'],
@@ -24,36 +25,14 @@ const pantoneColorLst = [
   ['Cerulean', '#98B4D4']
 ];
 
-class ColorBlock extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isHover: false };
-  }
-
-  handleHover = () => {
-    this.setState(prevState => ({
-      isHover: !prevState.isHover
-    }));
-  };
-
-  render() {
-    return (
-      <div
-        className="Pantone-ColorBlock"
-        style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
-      >
-        <p className="ColorBlock-name">{this.props.name}</p>
-        <p className="ColorBlock-value">{this.props.color}</p>
-      </div>
-    );
-  }
-}
-
-export function PantoneColorPane() {
+export function PantoneColorPane(props) {
   const colorBlocks = pantoneColorLst.map(colorItem => (
-    <ColorBlock name={colorItem[0]} color={colorItem[1]} />
+    <ColorBlock
+      pane="Pantone"
+      name={colorItem[0]}
+      color={colorItem[1]}
+      isRgb={props.isRgb}
+    />
   ));
 
   return <div className="Pantone-ColorPane">{colorBlocks}</div>;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { isLight } from './util/Color';
+import { hex2rgb, isLight } from './util/Color';
 
 const MDColorLst = [
   [
@@ -313,15 +313,26 @@ class ColorBlock extends Component {
     }));
   };
 
+  handleClick = () => {};
+
   fontColor = () => (isLight(this.props.color) ? 'black' : 'white');
 
   render() {
+    let colorVal;
+    if (this.props.isRgb) {
+      const [red, green, blue] = hex2rgb(this.props.color);
+      colorVal = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+    } else {
+      colorVal = this.props.color;
+    }
+
     return (
       <div
         className={this.props.class}
         style={{ backgroundColor: this.props.color }}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
+        onClick={this.handleClick}
       >
         <p
           className="ColorBlock-name"
@@ -335,14 +346,14 @@ class ColorBlock extends Component {
           hidden={!this.state.isHover}
           style={{ color: this.fontColor() }}
         >
-          {this.props.color}
+          {colorVal}
         </p>
       </div>
     );
   }
 }
 
-export function MDColorPane() {
+export function MDColorPane(props) {
   const colorBlocks = MDColorLst.map(colorSetItem => (
     <ColorSetBlock>
       {colorSetItem.map(colorItem => (
@@ -350,6 +361,7 @@ export function MDColorPane() {
           name={colorItem[0]}
           color={colorItem[1]}
           class="MD-ColorBlock"
+          isRgb={props.isRgb}
         />
       ))}
     </ColorSetBlock>

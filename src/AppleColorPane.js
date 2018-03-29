@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import { ColorBlock } from './ColorBlock';
 
 const appleColorLst = [
   ['Red', '#FF3B30'],
@@ -12,36 +13,14 @@ const appleColorLst = [
   ['Pink', '#FF2D55']
 ];
 
-class ColorBlock extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isHover: false };
-  }
-
-  handleHover = () => {
-    this.setState(prevState => ({
-      isHover: !prevState.isHover
-    }));
-  };
-
-  render() {
-    return (
-      <div
-        className="Apple-ColorBlock"
-        style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
-      >
-        <p className="ColorBlock-name">{this.props.name}</p>
-        <p className="ColorBlock-value">{this.props.color}</p>
-      </div>
-    );
-  }
-}
-
-export function AppleColorPane() {
+export function AppleColorPane(props) {
   const colorBlocks = appleColorLst.map(colorItem => (
-    <ColorBlock name={colorItem[0]} color={colorItem[1]} />
+    <ColorBlock
+      pane="Apple"
+      name={colorItem[0]}
+      color={colorItem[1]}
+      isRgb={props.isRgb}
+    />
   ));
 
   return <div className="Apple-ColorPane">{colorBlocks}</div>;

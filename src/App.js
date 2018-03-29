@@ -28,7 +28,7 @@ function NavigationItem(props) {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentPane: 1, isExpanded: false };
+    this.state = { currentPane: 1, isExpanded: false, isRgb: false };
   }
 
   changePane = paneId => {
@@ -41,6 +41,12 @@ class App extends Component {
     }));
   };
 
+  toggleColorFormat = () => {
+    this.setState(prevState => ({
+      isRgb: !prevState.isRgb
+    }));
+  };
+
   render() {
     let ColorPane;
     let navClassName =
@@ -48,19 +54,19 @@ class App extends Component {
       (this.state.isExpanded ? 'Navigator-expanded' : 'Navigator-collapsed');
     switch (this.state.currentPane) {
       case 1: {
-        ColorPane = <AppleColorPane />;
+        ColorPane = <AppleColorPane isRgb={this.state.isRgb} />;
         break;
       }
       case 2: {
-        ColorPane = <MDColorPane />;
+        ColorPane = <MDColorPane isRgb={this.state.isRgb} />;
         break;
       }
       case 3: {
-        ColorPane = <PantoneColorPane />;
+        ColorPane = <PantoneColorPane isRgb={this.state.isRgb} />;
         break;
       }
       default: {
-        ColorPane = <AppleColorPane />;
+        ColorPane = <AppleColorPane isRgb={this.state.isRgb} />;
       }
     }
 
@@ -94,6 +100,9 @@ class App extends Component {
             a_href="https://www.pantone.com"
             name="Pantone Color of the Year"
           />
+          <div className="ColorFormat" onClick={this.toggleColorFormat}>
+            <p>{this.state.isRgb ? 'RGB' : 'Hex'}</p>
+          </div>
         </div>
         <div className="ColorPane">{ColorPane}</div>
       </div>
