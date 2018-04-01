@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { hex2rgb, isLight } from './util/Color';
+import { ColorBlock } from './ColorBlock';
 
 const MDColorLst = [
   [
@@ -302,77 +302,14 @@ function ColorSetBlock(props) {
   return <div className="MD-ColorSetBlock"> {props.children} </div>;
 }
 
-class ColorBlock extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { isHover: false };
-  }
-
-  handleHover = () => {
-    this.setState(prevState => ({
-      isHover: !prevState.isHover
-    }));
-  };
-
-  handleClick = colorId => {
-    const aux = document.createElement('input');
-    aux.style.position = 'absolute';
-    aux.style.left = '-9999px';
-    aux.style.top = '0';
-    aux.setAttribute('value', document.getElementById(colorId).innerHTML);
-    document.body.appendChild(aux);
-    aux.select();
-    document.execCommand('copy');
-    document.body.removeChild(aux);
-  };
-
-  fontColor = () => (isLight(this.props.color) ? 'black' : 'white');
-
-  render() {
-    let colorVal;
-    if (this.props.isRgb) {
-      const [red, green, blue] = hex2rgb(this.props.color);
-      colorVal = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
-    } else {
-      colorVal = this.props.color;
-    }
-
-    const colorId = 'ColorBlock-value-' + this.props.id;
-
-    return (
-      <div
-        className="MD-ColorBlock"
-        style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
-        onClick={e => this.handleClick(colorId, e)}
-      >
-        <p
-          className="ColorBlock-name"
-          hidden={!this.state.isHover}
-          style={{ color: this.fontColor() }}
-        >
-          {this.props.name}
-        </p>
-        <p
-          className="ColorBlock-value"
-          id={colorId}
-          hidden={!this.state.isHover}
-          style={{ color: this.fontColor() }}
-        >
-          {colorVal}
-        </p>
-      </div>
-    );
-  }
-}
-
 export function MDColorPane(props) {
   const colorBlocks = MDColorLst.map(colorSetItem => (
     <ColorSetBlock key={colorSetItem[0][0]}>
       {colorSetItem.map(colorItem => (
         <ColorBlock
-          key={colorItem[0] + colorItem[1]}
+          key={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
+          id={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
+          pane="MD"
           name={colorItem[0]}
           color={colorItem[1]}
           isRgb={props.isRgb}
@@ -383,12 +320,6 @@ export function MDColorPane(props) {
 
   return <div className="MD-ColorPane">{colorBlocks}</div>;
 }
-
-ColorBlock.propTypes = {
-  name: PropTypes.string,
-  color: PropTypes.string,
-  isRgb: PropTypes.bool
-};
 
 MDColorPane.propTypes = {
   isRgb: PropTypes.bool

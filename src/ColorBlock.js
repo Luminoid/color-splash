@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { hex2rgb } from './util/Color';
+import { hex2rgb, isLight } from './util/Color';
 
 export class ColorBlock extends PureComponent {
   constructor(props) {
@@ -26,6 +26,8 @@ export class ColorBlock extends PureComponent {
     document.body.removeChild(aux);
   };
 
+  fontColor = () => (isLight(this.props.color) ? 'black' : 'white');
+
   render() {
     let colorVal;
     if (this.props.isRgb) {
@@ -35,9 +37,9 @@ export class ColorBlock extends PureComponent {
       colorVal = this.props.color;
     }
 
-    const colorId = 'ColorBlock-value-' + this.props.id;
+    const colorId = this.props.pane + 'ColorBlock-value-' + this.props.id;
 
-    return (
+    return this.props.pane !== 'MD' ? (
       <div
         className={this.props.pane + '-ColorBlock'}
         style={{ backgroundColor: this.props.color }}
@@ -47,6 +49,30 @@ export class ColorBlock extends PureComponent {
       >
         <p className="ColorBlock-name">{this.props.name}</p>
         <p className="ColorBlock-value" id={colorId}>
+          {colorVal}
+        </p>
+      </div>
+    ) : (
+      <div
+        className="MD-ColorBlock"
+        style={{ backgroundColor: this.props.color }}
+        onMouseEnter={this.handleHover}
+        onMouseLeave={this.handleHover}
+        onClick={e => this.handleClick(colorId, e)}
+      >
+        <p
+          className="ColorBlock-name"
+          hidden={!this.state.isHover}
+          style={{ color: this.fontColor() }}
+        >
+          {this.props.name}
+        </p>
+        <p
+          className="ColorBlock-value"
+          id={colorId}
+          hidden={!this.state.isHover}
+          style={{ color: this.fontColor() }}
+        >
           {colorVal}
         </p>
       </div>

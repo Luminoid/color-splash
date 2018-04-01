@@ -17,8 +17,8 @@ const appleColorLst = [
 export function AppleColorPane(props) {
   const colorBlocks = appleColorLst.map(colorItem => (
     <ColorBlock
-      key={colorItem[0] + colorItem[1]}
-      id={colorItem[0] + colorItem[1]}
+      key={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
+      id={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
       pane="Apple"
       name={colorItem[0]}
       color={colorItem[1]}
