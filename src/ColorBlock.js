@@ -14,7 +14,7 @@ export class ColorBlock extends PureComponent {
     }));
   };
 
-  handleClick = colorId => {
+  handleClick = (colorId, colorVal) => {
     const aux = document.createElement('input');
     aux.style.position = 'absolute';
     aux.style.left = '-9999px';
@@ -24,6 +24,8 @@ export class ColorBlock extends PureComponent {
     aux.select();
     document.execCommand('copy');
     document.body.removeChild(aux);
+
+    this.props.toggleDisplayView(this.props.color, colorVal);
   };
 
   fontColor = () => (isLight(this.props.color) ? 'black' : 'white');
@@ -45,7 +47,7 @@ export class ColorBlock extends PureComponent {
         style={{ backgroundColor: this.props.color }}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
-        onClick={e => this.handleClick(colorId, e)}
+        onClick={e => this.handleClick(colorId, colorVal, e)}
       >
         <p className="ColorBlock-name">{this.props.name}</p>
         <p className="ColorBlock-value" id={colorId}>
@@ -58,7 +60,7 @@ export class ColorBlock extends PureComponent {
         style={{ backgroundColor: this.props.color }}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
-        onClick={e => this.handleClick(colorId, e)}
+        onClick={e => this.handleClick(colorId, colorVal, e)}
       >
         <p
           className="ColorBlock-name"
@@ -85,5 +87,6 @@ ColorBlock.propTypes = {
   pane: PropTypes.string,
   name: PropTypes.string,
   color: PropTypes.string,
-  isRgb: PropTypes.bool
+  isRgb: PropTypes.bool,
+  toggleDisplayView: PropTypes.func
 };

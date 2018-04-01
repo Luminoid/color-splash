@@ -313,6 +313,7 @@ export function MDColorPane(props) {
           name={colorItem[0]}
           color={colorItem[1]}
           isRgb={props.isRgb}
+          toggleDisplayView={props.toggleDisplayView}
         />
       ))}
     </ColorSetBlock>

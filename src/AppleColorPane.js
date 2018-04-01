@@ -23,6 +23,7 @@ export function AppleColorPane(props) {
       name={colorItem[0]}
       color={colorItem[1]}
       isRgb={props.isRgb}
+      toggleDisplayView={props.toggleDisplayView}
     />
   ));
 

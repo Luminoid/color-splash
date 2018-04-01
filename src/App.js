@@ -9,6 +9,78 @@ import { AppleColorPane } from './AppleColorPane';
 import { MDColorPane } from './MDColorPane';
 import { PantoneColorPane } from './PantoneColorPane';
 
+class DisplayColorView extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: false,
+      style: {
+        opacity: 0,
+        backgroundColor: this.props.color
+      }
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(this.mountStyle, 10);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (!newProps.mounted) {
+      this.unmountStyle();
+    } else {
+      this.setState({
+        display: true
+      });
+      setTimeout(this.mountStyle, 10);
+    }
+  }
+
+  mountStyle = () => {
+    this.setState({
+      style: {
+        opacity: 1,
+        backgroundColor: this.props.color,
+        transition: 'all 0.5s ease-out'
+      }
+    });
+  };
+
+  unmountStyle = () => {
+    this.setState({
+      style: {
+        opacity: 0,
+        backgroundColor: this.props.color,
+        transition: 'all 0.5s ease-in'
+      }
+    });
+  };
+
+  transitionEnd = () => {
+    if (this.props.mounted) {
+      setTimeout(this.props.toggleDisplayView, 10);
+    } else {
+      this.setState({
+        display: false
+      });
+    }
+  };
+
+  render() {
+    return (
+      this.state.display && (
+        <div
+          className="DisplayColorView"
+          style={this.state.style}
+          onTransitionEnd={this.transitionEnd}
+        >
+          <p>{this.props.text} Copied!</p>
+        </div>
+      )
+    );
+  }
+}
+
 function NavigationItem(props) {
   return (
     <div className="Navigator-item">
@@ -29,7 +101,14 @@ function NavigationItem(props) {
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { currentPane: 1, isExpanded: false, isRgb: false };
+    this.state = {
+      currentPane: 1,
+      isExpanded: false,
+      isRgb: false,
+      isDisplayViewToggled: false,
+      displayColor: 'black',
+      displayText: ''
+    };
   }
 
   changePane = paneId => {
@@ -48,6 +127,18 @@ class App extends PureComponent {
     }));
   };
 
+  toggleDisplayView = (displayColor = '', displayText = '') => {
+    if (displayColor !== '') {
+      this.setState({
+        displayColor: displayColor,
+        displayText: displayText
+      });
+    }
+    this.setState(prevState => ({
+      isDisplayViewToggled: !prevState.isDisplayViewToggled
+    }));
+  };
+
   render() {
     let ColorPane;
     let navClassName =
@@ -55,19 +146,39 @@ class App extends PureComponent {
       (this.state.isExpanded ? 'Navigator-expanded' : 'Navigator-collapsed');
     switch (this.state.currentPane) {
       case 1: {
-        ColorPane = <AppleColorPane isRgb={this.state.isRgb} />;
+        ColorPane = (
+          <AppleColorPane
+            isRgb={this.state.isRgb}
+            toggleDisplayView={this.toggleDisplayView}
+          />
+        );
         break;
       }
       case 2: {
-        ColorPane = <MDColorPane isRgb={this.state.isRgb} />;
+        ColorPane = (
+          <MDColorPane
+            isRgb={this.state.isRgb}
+            toggleDisplayView={this.toggleDisplayView}
+          />
+        );
         break;
       }
       case 3: {
-        ColorPane = <PantoneColorPane isRgb={this.state.isRgb} />;
+        ColorPane = (
+          <PantoneColorPane
+            isRgb={this.state.isRgb}
+            toggleDisplayView={this.toggleDisplayView}
+          />
+        );
         break;
       }
       default: {
-        ColorPane = <AppleColorPane isRgb={this.state.isRgb} />;
+        ColorPane = (
+          <AppleColorPane
+            isRgb={this.state.isRgb}
+            toggleDisplayView={this.toggleDisplayView}
+          />
+        );
       }
     }
 
@@ -106,10 +217,23 @@ class App extends PureComponent {
           </div>
         </div>
         <div className="ColorPane">{ColorPane}</div>
+        <DisplayColorView
+          color={this.state.displayColor}
+          text={this.state.displayText}
+          toggleDisplayView={this.toggleDisplayView}
+          mounted={this.state.isDisplayViewToggled}
+        />
       </div>
     );
   }
 }
+
+DisplayColorView.prototypes = {
+  color: PropTypes.string,
+  text: PropTypes.string,
+  toggleDisplayView: PropTypes.func,
+  mounted: PropTypes.bool
+};
 
 NavigationItem.propTypes = {
   img_src: PropTypes.string,
