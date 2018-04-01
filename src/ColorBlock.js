@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { hex2rgb } from './util/Color';
 
-export class ColorBlock extends Component {
+export class ColorBlock extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isHover: false };
@@ -34,7 +35,7 @@ export class ColorBlock extends Component {
       colorVal = this.props.color;
     }
 
-    const colorId = this.props.name + this.props.color;
+    const colorId = 'ColorBlock-value-' + this.props.id;
 
     return (
       <div
@@ -52,3 +53,11 @@ export class ColorBlock extends Component {
     );
   }
 }
+
+ColorBlock.propTypes = {
+  id: PropTypes.string,
+  pane: PropTypes.string,
+  name: PropTypes.string,
+  color: PropTypes.string,
+  isRgb: PropTypes.bool
+};

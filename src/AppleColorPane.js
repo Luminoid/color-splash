@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import { ColorBlock } from './ColorBlock';
 
@@ -16,6 +17,8 @@ const appleColorLst = [
 export function AppleColorPane(props) {
   const colorBlocks = appleColorLst.map(colorItem => (
     <ColorBlock
+      key={colorItem[0] + colorItem[1]}
+      id={colorItem[0] + colorItem[1]}
       pane="Apple"
       name={colorItem[0]}
       color={colorItem[1]}
@@ -25,3 +28,7 @@ export function AppleColorPane(props) {
 
   return <div className="Apple-ColorPane">{colorBlocks}</div>;
 }
+
+AppleColorPane.propTypes = {
+  isRgb: PropTypes.bool
+};

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import MenuIcon from './res/Menu.png';
 import AppleLogo from './res/Apple_Logo.png';
@@ -25,7 +26,7 @@ function NavigationItem(props) {
   );
 }
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { currentPane: 1, isExpanded: false, isRgb: false };
@@ -109,5 +110,14 @@ class App extends Component {
     );
   }
 }
+
+NavigationItem.propTypes = {
+  img_src: PropTypes.string,
+  img_alt: PropTypes.string,
+  changePane: PropTypes.func,
+  paneId: PropTypes.number,
+  a_href: PropTypes.string,
+  name: PropTypes.string
+};
 
 export default App;

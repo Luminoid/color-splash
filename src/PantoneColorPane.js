@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import { ColorBlock } from './ColorBlock';
 
@@ -28,6 +29,8 @@ const pantoneColorLst = [
 export function PantoneColorPane(props) {
   const colorBlocks = pantoneColorLst.map(colorItem => (
     <ColorBlock
+      key={colorItem[0] + colorItem[1]}
+      id={colorItem[0] + colorItem[1]}
       pane="Pantone"
       name={colorItem[0]}
       color={colorItem[1]}
@@ -37,3 +40,7 @@ export function PantoneColorPane(props) {
 
   return <div className="Pantone-ColorPane">{colorBlocks}</div>;
 }
+
+PantoneColorPane.propTypes = {
+  isRgb: PropTypes.bool
+};
