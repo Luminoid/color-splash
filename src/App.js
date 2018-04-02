@@ -8,78 +8,7 @@ import PantoneLogo from './res/Pantone_Logo.png';
 import { AppleColorPane } from './AppleColorPane';
 import { MDColorPane } from './MDColorPane';
 import { PantoneColorPane } from './PantoneColorPane';
-
-class DisplayColorView extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      display: false,
-      style: {
-        opacity: 0,
-        backgroundColor: this.props.color
-      }
-    };
-  }
-
-  componentDidMount() {
-    setTimeout(this.mountStyle, 10);
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (!newProps.mounted) {
-      this.unmountStyle();
-    } else {
-      this.setState({
-        display: true
-      });
-      setTimeout(this.mountStyle, 10);
-    }
-  }
-
-  mountStyle = () => {
-    this.setState({
-      style: {
-        opacity: 1,
-        backgroundColor: this.props.color,
-        transition: 'all 0.5s ease-out'
-      }
-    });
-  };
-
-  unmountStyle = () => {
-    this.setState({
-      style: {
-        opacity: 0,
-        backgroundColor: this.props.color,
-        transition: 'all 0.5s ease-in'
-      }
-    });
-  };
-
-  transitionEnd = () => {
-    if (this.props.mounted) {
-      setTimeout(this.props.toggleDisplayView, 10);
-    } else {
-      this.setState({
-        display: false
-      });
-    }
-  };
-
-  render() {
-    return (
-      this.state.display && (
-        <div
-          className="DisplayColorView"
-          style={this.state.style}
-          onTransitionEnd={this.transitionEnd}
-        >
-          <p>{this.props.text} Copied!</p>
-        </div>
-      )
-    );
-  }
-}
+import { DisplayColorView } from './DisplayColorView';
 
 function NavigationItem(props) {
   return (
@@ -106,7 +35,7 @@ class App extends PureComponent {
       isExpanded: false,
       isRgb: false,
       isDisplayViewToggled: false,
-      displayColor: 'black',
+      displayColor: '',
       displayText: ''
     };
   }
@@ -227,13 +156,6 @@ class App extends PureComponent {
     );
   }
 }
-
-DisplayColorView.prototypes = {
-  color: PropTypes.string,
-  text: PropTypes.string,
-  toggleDisplayView: PropTypes.func,
-  mounted: PropTypes.bool
-};
 
 NavigationItem.propTypes = {
   img_src: PropTypes.string,

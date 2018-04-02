@@ -229,6 +229,10 @@
 }
 
 .DisplayColorView > p {
-  font-size: 84px;
+  position: relative;
+
+  font-size: 96px;
+  font-weight: bold;
   color: white;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.12), -4px 8px 8px rgba(0, 0, 0, 0.24);
 }

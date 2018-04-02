@@ -323,5 +323,6 @@ export function MDColorPane(props) {
 }
 
 MDColorPane.propTypes = {
-  isRgb: PropTypes.bool
+  isRgb: PropTypes.bool,
+  toggleDisplayView: PropTypes.func
 };

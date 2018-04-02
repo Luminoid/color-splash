@@ -8,10 +8,16 @@ export class ColorBlock extends PureComponent {
     this.state = { isHover: false };
   }
 
-  handleHover = () => {
-    this.setState(prevState => ({
-      isHover: !prevState.isHover
-    }));
+  handleMouseEnter = () => {
+    this.setState({
+      isHover: true
+    });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({
+      isHover: false
+    });
   };
 
   handleClick = (colorId, colorVal) => {
@@ -45,8 +51,8 @@ export class ColorBlock extends PureComponent {
       <div
         className={this.props.pane + '-ColorBlock'}
         style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         onClick={e => this.handleClick(colorId, colorVal, e)}
       >
         <p className="ColorBlock-name">{this.props.name}</p>
@@ -58,8 +64,8 @@ export class ColorBlock extends PureComponent {
       <div
         className="MD-ColorBlock"
         style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         onClick={e => this.handleClick(colorId, colorVal, e)}
       >
         <p

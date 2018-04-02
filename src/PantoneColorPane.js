@@ -43,5 +43,6 @@ export function PantoneColorPane(props) {
 }
 
 PantoneColorPane.propTypes = {
-  isRgb: PropTypes.bool
+  isRgb: PropTypes.bool,
+  toggleDisplayView: PropTypes.func
 };

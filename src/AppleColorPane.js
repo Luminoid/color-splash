@@ -31,5 +31,6 @@ export function AppleColorPane(props) {
 }
 
 AppleColorPane.propTypes = {
-  isRgb: PropTypes.bool
+  isRgb: PropTypes.bool,
+  toggleDisplayView: PropTypes.func
 };
