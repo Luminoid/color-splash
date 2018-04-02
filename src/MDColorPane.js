@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { ColorBlock } from './ColorBlock';
+import ColorBlock from './ColorBlock';
 
 const MDColorLst = [
   [
@@ -302,7 +302,7 @@ function ColorSetBlock(props) {
   return <div className="MD-ColorSetBlock"> {props.children} </div>;
 }
 
-export function MDColorPane(props) {
+function MDColorPane(props) {
   const colorBlocks = MDColorLst.map(colorSetItem => (
     <ColorSetBlock key={colorSetItem[0][0]}>
       {colorSetItem.map(colorItem => (
@@ -326,3 +326,5 @@ MDColorPane.propTypes = {
   isRgb: PropTypes.bool,
   toggleDisplayView: PropTypes.func
 };
+
+export default MDColorPane;

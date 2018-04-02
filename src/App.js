@@ -5,10 +5,10 @@ import MenuIcon from './res/Menu.png';
 import AppleLogo from './res/Apple_Logo.png';
 import MDLogo from './res/Material_Design_Logo.png';
 import PantoneLogo from './res/Pantone_Logo.png';
-import { AppleColorPane } from './AppleColorPane';
-import { MDColorPane } from './MDColorPane';
-import { PantoneColorPane } from './PantoneColorPane';
-import { DisplayColorView } from './DisplayColorView';
+import AppleColorPane from './AppleColorPane';
+import MDColorPane from './MDColorPane';
+import PantoneColorPane from './PantoneColorPane';
+import DisplayColorView from './DisplayColorView';
 
 function NavigationItem(props) {
   return (

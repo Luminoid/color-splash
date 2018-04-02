@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { hex2rgb, isLight } from './util/Color';
 
-export class ColorBlock extends PureComponent {
+class ColorBlock extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isHover: false };
@@ -96,3 +96,5 @@ ColorBlock.propTypes = {
   isRgb: PropTypes.bool,
   toggleDisplayView: PropTypes.func
 };
+
+export default ColorBlock;

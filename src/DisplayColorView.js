@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export class DisplayColorView extends PureComponent {
+class DisplayColorView extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,3 +75,5 @@ DisplayColorView.prototypes = {
   toggleDisplayView: PropTypes.func,
   mounted: PropTypes.bool
 };
+
+export default DisplayColorView;

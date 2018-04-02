@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { ColorBlock } from './ColorBlock';
+import ColorBlock from './ColorBlock';
 
 const appleColorLst = [
   ['Red', '#FF3B30'],
@@ -14,7 +14,7 @@ const appleColorLst = [
   ['Pink', '#FF2D55']
 ];
 
-export function AppleColorPane(props) {
+function AppleColorPane(props) {
   const colorBlocks = appleColorLst.map(colorItem => (
     <ColorBlock
       key={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
@@ -34,3 +34,5 @@ AppleColorPane.propTypes = {
   isRgb: PropTypes.bool,
   toggleDisplayView: PropTypes.func
 };
+
+export default AppleColorPane;

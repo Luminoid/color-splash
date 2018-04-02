@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { ColorBlock } from './ColorBlock';
+import ColorBlock from './ColorBlock';
 
 const pantoneColorLst = [
   ['Ultra Violet', '#5F4B8B'],
@@ -26,7 +26,7 @@ const pantoneColorLst = [
   ['Cerulean', '#98B4D4']
 ];
 
-export function PantoneColorPane(props) {
+function PantoneColorPane(props) {
   const colorBlocks = pantoneColorLst.map(colorItem => (
     <ColorBlock
       key={(colorItem[0] + colorItem[1]).replace(/\s/g, '')}
@@ -46,3 +46,5 @@ PantoneColorPane.propTypes = {
   isRgb: PropTypes.bool,
   toggleDisplayView: PropTypes.func
 };
+
+export default PantoneColorPane;

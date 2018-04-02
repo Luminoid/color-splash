@@ -231,6 +231,7 @@
 .DisplayColorView > p {
   position: relative;
 
+  text-align: center;
   font-size: 96px;
   font-weight: bold;
   color: white;
