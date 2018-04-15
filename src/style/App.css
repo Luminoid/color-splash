@@ -81,6 +81,10 @@
   color: white;
 }
 
+.ColorBlock-value {
+  text-align: right;
+}
+
 .ColorPane {
   flex: auto;
 }
@@ -126,7 +130,8 @@
   color: white;
 }
 
-.MD-ColorPane {
+.MD-ColorPane,
+.OpenColor-ColorPane {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -137,7 +142,8 @@
   height: 100%;
 }
 
-.MD-ColorSetBlock {
+.MD-ColorSetBlock,
+.OpenColor-ColorSetBlock {
   flex: auto;
 
   display: flex;
@@ -214,6 +220,37 @@
 
   font-size: 16px;
   color: white;
+}
+
+.OpenColor-ColorBlock {
+  width: 100%;
+  height: 10%; /* 100/10 */
+  /* ColorBlock-name position */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* ColorBlock-value position */
+  position: relative;
+}
+
+.OpenColor-ColorBlock > .ColorBlock-name {
+  margin: 0;
+  padding: 0;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.OpenColor-ColorBlock > .ColorBlock-value {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 12px;
 }
 
 .DisplayColorView {

@@ -47,44 +47,81 @@ class ColorBlock extends PureComponent {
 
     const colorId = this.props.pane + 'ColorBlock-value-' + this.props.id;
 
-    return this.props.pane !== 'MD' ? (
-      <div
-        className={this.props.pane + '-ColorBlock'}
-        style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onClick={e => this.handleClick(colorId, colorVal, e)}
-      >
-        <p className="ColorBlock-name">{this.props.name}</p>
-        <p className="ColorBlock-value" id={colorId}>
-          {colorVal}
-        </p>
-      </div>
-    ) : (
-      <div
-        className="MD-ColorBlock"
-        style={{ backgroundColor: this.props.color }}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onClick={e => this.handleClick(colorId, colorVal, e)}
-      >
-        <p
-          className="ColorBlock-name"
-          hidden={!this.state.isHover}
-          style={{ color: this.fontColor() }}
-        >
-          {this.props.name}
-        </p>
-        <p
-          className="ColorBlock-value"
-          id={colorId}
-          hidden={!this.state.isHover}
-          style={{ color: this.fontColor() }}
-        >
-          {colorVal}
-        </p>
-      </div>
-    );
+    let blockDiv;
+
+    switch (this.props.pane) {
+      case 'MD':
+        blockDiv = (
+          <div
+            className="MD-ColorBlock"
+            style={{ backgroundColor: this.props.color }}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onClick={e => this.handleClick(colorId, colorVal, e)}
+          >
+            <p
+              className="ColorBlock-name"
+              hidden={!this.state.isHover}
+              style={{ color: this.fontColor() }}
+            >
+              {this.props.name}
+            </p>
+            <p
+              className="ColorBlock-value"
+              id={colorId}
+              hidden={!this.state.isHover}
+              style={{ color: this.fontColor() }}
+            >
+              {colorVal}
+            </p>
+          </div>
+        );
+        break;
+      case 'OpenColor':
+        blockDiv = (
+          <div
+            className="OpenColor-ColorBlock"
+            style={{ backgroundColor: this.props.color }}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onClick={e => this.handleClick(colorId, colorVal, e)}
+          >
+            <p
+              className="ColorBlock-name"
+              hidden={!this.state.isHover}
+              style={{ color: this.fontColor() }}
+            >
+              {this.props.name}
+            </p>
+            <p
+              className="ColorBlock-value"
+              id={colorId}
+              hidden={!this.state.isHover}
+              style={{ color: this.fontColor() }}
+            >
+              {colorVal}
+            </p>
+          </div>
+        );
+        break;
+      default:
+        blockDiv = (
+          <div
+            className={this.props.pane + '-ColorBlock'}
+            style={{ backgroundColor: this.props.color }}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onClick={e => this.handleClick(colorId, colorVal, e)}
+          >
+            <p className="ColorBlock-name">{this.props.name}</p>
+            <p className="ColorBlock-value" id={colorId}>
+              {colorVal}
+            </p>
+          </div>
+        );
+    }
+
+    return blockDiv;
   }
 }
 

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import AppleColorPane from './AppleColorPane';
 import MDColorPane from './MDColorPane';
 import PantoneColorPane from './PantoneColorPane';
+import OpenColorPane from './OpenColorPane';
 import DisplayColorView from './DisplayColorView';
 import '../style/App.css';
 import MenuIcon from '../res/Menu.png';
 import AppleLogo from '../res/Apple_Logo.png';
 import MDLogo from '../res/Material_Design_Logo.png';
 import PantoneLogo from '../res/Pantone_Logo.png';
+import OpenColorLogo from '../res/Open_Color_Logo.png';
 
 function NavigationItem(props) {
   return (
@@ -101,6 +103,15 @@ class App extends PureComponent {
         );
         break;
       }
+      case 4: {
+        ColorPane = (
+          <OpenColorPane
+            isRgb={this.state.isRgb}
+            toggleDisplayView={this.toggleDisplayView}
+          />
+        );
+        break;
+      }
       default: {
         ColorPane = (
           <AppleColorPane
@@ -140,6 +151,14 @@ class App extends PureComponent {
             paneId={3}
             a_href="https://www.pantone.com"
             name="Pantone Color of the Year"
+          />
+          <NavigationItem
+            img_src={OpenColorLogo}
+            img_alt="Open Color logo"
+            changePane={this.changePane}
+            paneId={4}
+            a_href="https://yeun.github.io/open-color/"
+            name="Open Color Scheme"
           />
           <div className="ColorFormat" onClick={this.toggleColorFormat}>
             <p>{this.state.isRgb ? 'RGB' : 'Hex'}</p>
