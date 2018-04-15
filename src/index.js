@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import App from './components/App';
+import './style/index.css';
+import registerServiceWorker from './util/registerServiceWorker';
 
 ReactDOM.render(
   <DocumentTitle title="Color Splash">

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { hex2rgb, isLight } from './util/Color';
+import { hex2rgb, isLight } from '../util/Color';
 
 class ColorBlock extends PureComponent {
   constructor(props) {

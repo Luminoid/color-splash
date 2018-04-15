@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
-import MenuIcon from './res/Menu.png';
-import AppleLogo from './res/Apple_Logo.png';
-import MDLogo from './res/Material_Design_Logo.png';
-import PantoneLogo from './res/Pantone_Logo.png';
 import AppleColorPane from './AppleColorPane';
 import MDColorPane from './MDColorPane';
 import PantoneColorPane from './PantoneColorPane';
 import DisplayColorView from './DisplayColorView';
+import '../style/App.css';
+import MenuIcon from '../res/Menu.png';
+import AppleLogo from '../res/Apple_Logo.png';
+import MDLogo from '../res/Material_Design_Logo.png';
+import PantoneLogo from '../res/Pantone_Logo.png';
 
 function NavigationItem(props) {
   return (

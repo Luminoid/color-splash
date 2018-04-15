@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import ColorBlock from './ColorBlock';
+import '../style/App.css';
 
 const pantoneColorLst = [
   ['Ultra Violet', '#5F4B8B'],
